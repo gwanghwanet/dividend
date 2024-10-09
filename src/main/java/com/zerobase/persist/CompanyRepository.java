@@ -16,5 +16,9 @@ public interface CompanyRepository extends JpaRepository<CompanyEntity, Long> {
     // Null 포인트 Exception 예방 및 코드 간결화를 위해 Optional<?>로 반환
     Optional<CompanyEntity> findByName(String name);
 
+    Optional<CompanyEntity> findByTicker(String ticker);
+
     Page<CompanyEntity> findByNameStartingWithIgnoreCase(String s, Pageable limit);
+
+
 }

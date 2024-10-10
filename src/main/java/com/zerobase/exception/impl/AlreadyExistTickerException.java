@@ -3,8 +3,7 @@ package com.zerobase.exception.impl;
 import com.zerobase.exception.AbstractException;
 import org.springframework.http.HttpStatus;
 
-
-public class NoCompanyException extends AbstractException {
+public class AlreadyExistTickerException extends AbstractException {
     @Override
     public int getStatusCode() {
         return HttpStatus.BAD_REQUEST.value();
@@ -12,6 +11,6 @@ public class NoCompanyException extends AbstractException {
 
     @Override
     public String getMessage() {
-        return "존재하지 않는 회사명 입니다.";
+        return "이미 존재하는 종목 코드(Ticker) 입니다.";
     }
 }

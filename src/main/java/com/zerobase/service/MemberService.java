@@ -1,6 +1,8 @@
 package com.zerobase.service;
 
 import com.zerobase.exception.impl.AlreadyExistUserException;
+import com.zerobase.exception.impl.NotExistUsernameException;
+import com.zerobase.exception.impl.NotMatchPasswordException;
 import com.zerobase.model.Auth;
 import com.zerobase.persist.entity.MemberEntity;
 import com.zerobase.persist.MemberRepository;
@@ -43,11 +45,11 @@ public class MemberService implements UserDetailsService {
     public MemberEntity authenticate(Auth.SignIn member) {
         // username 으로 저장되어 있는 지 확인
         MemberEntity user = this.memberRepository.findByUsername(member.getUsername())
-                                                 .orElseThrow(() -> new RuntimeException("존재하지 않는 ID 입니다."));
+                                                 .orElseThrow(NotExistUsernameException::new);
 
         // 입력받은 password 와 저장되어 있는 password 가 같은 지 확인
         if(!this.passwordEncoder.matches(member.getPassword(), user.getPassword())) {
-            throw new RuntimeException("비밀번호가 일치하지 않습니다.");
+            throw new NotMatchPasswordException();
         }
 
         return user;

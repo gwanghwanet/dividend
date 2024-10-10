@@ -1,5 +1,6 @@
 package com.zerobase.web;
 
+import com.zerobase.exception.impl.EmptyTickerException;
 import com.zerobase.model.Company;
 import com.zerobase.model.constants.CacheKey;
 import com.zerobase.persist.entity.CompanyEntity;
@@ -45,7 +46,7 @@ public class CompanyController {
     public ResponseEntity<?> addCompany(@RequestBody Company request) {
         String ticker = request.getTicker().trim();
         if(ObjectUtils.isEmpty(ticker)) {
-            throw new RuntimeException("ticker is empty");
+            throw new EmptyTickerException();
         }
 
         Company company = this.companyService.save(ticker);

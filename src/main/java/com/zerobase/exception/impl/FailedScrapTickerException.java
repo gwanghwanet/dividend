@@ -3,15 +3,14 @@ package com.zerobase.exception.impl;
 import com.zerobase.exception.AbstractException;
 import org.springframework.http.HttpStatus;
 
-
-public class NoCompanyException extends AbstractException {
+public class FailedScrapTickerException extends AbstractException {
     @Override
     public int getStatusCode() {
-        return HttpStatus.BAD_REQUEST.value();
+        return HttpStatus.INTERNAL_SERVER_ERROR.value();
     }
 
     @Override
     public String getMessage() {
-        return "존재하지 않는 회사명 입니다.";
+        return "해당 종목 코드를 스크래핑하는 데 실패하였습니다.";
     }
 }
